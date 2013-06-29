@@ -1,0 +1,19 @@
+{% extends "blog/layout.html" %}
+{% block mybody %}
+  <form action="/add_entry/" method="POST" class=add-entry>
+    {% csrf_token %}
+    <fieldset>
+      <label>Title</label>
+      <input type=text placeholder="Type title here" size=30 name=title>
+      <label>Text</label>
+      <textarea name="body_text" rows=5 cols=40></textarea>
+      <input type=submit value=Share>
+    </fieldset>
+  </form>
+  <ul class="entries">
+  {% for entry in entries %}
+  <li><strong><a class="entry_link" target="_blank" href="/entry/{{entry.id}}">{{entry.title}}</a></strong>
+    <p class="text-success">{{entry.body_text}}</p>
+  {% endfor %}
+  </ul>
+{% endblock %}

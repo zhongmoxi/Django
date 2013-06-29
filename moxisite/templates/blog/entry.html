@@ -1,0 +1,7 @@
+{% extends "blog/layout.html" %}
+{% block mybody %}
+  <div class=entries>
+    <li><strong><a class="entry_link" href="/entry/{{entry.id}}"> {{entry.title}}</a></strong>
+    <p class="text-success">{{ entry.body_text }}</p>
+  </div>
+{% endblock %}

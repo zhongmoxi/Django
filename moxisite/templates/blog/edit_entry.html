@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block mybody %}
+<form action="{{ url_for('edit_entry', entry_id=entry.id) }}" method="POST" class=add-entry>
+    <d1>
+     <dt>Title:
+     <dd><input type=text size=30 name=title value="{{entry.title}}">
+     <dt>Text:
+     <dd><textarea class="mdm-input"  name=text rows=5 cols=40> {{ entry.text }} </textarea>
+     <dd><input type=submit value=save_edit>
+    </d1>
+</form>
+{% endblock %}
