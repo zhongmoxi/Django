@@ -11,7 +11,7 @@ class Blog(models.Model):
 
 class User(models.Model):
     username = models.CharField(max_length=255)
-    password = models.TextField()
+    password = models.CharField(max_length=255)
 
     def __unicode__(self):
         return self.username

@@ -28,4 +28,5 @@ urlpatterns = patterns('',
     url(r'^show_entries/$', 'blog.views.show_entries'),
     url(r'^thank/$', 'blog.views.thank'),
     url(r'^entry/(?P<entry_id>\d+)/$', 'blog.views.entry'),
+    url(r'^login/$', 'blog.views.login'),
 )
