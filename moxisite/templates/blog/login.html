@@ -1,7 +1,7 @@
 {% extends "blog/layout.html" %}
 {% block mybody %}
   <h2>Login</h2>
-  {% if error %}<p class=error><strong>Error:</strong> {{error}}{% endif %}
+  {% if errors %}<p class=error><strong>Error:</strong> {{errors}}{% endif %}
   <form action="/login/" method="POST">
     {% csrf_token %}
     <input type=text name=username placeholder="Username">

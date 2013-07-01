@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, Http404
 from blog.models import Blog, User
+from django.template import RequestContext
 
 def add_entry(request):
     if request.method == 'POST':
@@ -18,11 +19,11 @@ def add_entry(request):
     return render(request, 'blog/show_entries.html')
 
 def thank(request):
-    return render(request,'blog/thank.html')
+    return render(request, 'blog/thank.html')
 
 def show_entries(request):
     entries = Blog.objects.all()
-    return render(request, 'blog/show_entries.html', {'entries':entries})
+    return render(request, 'blog/show_entries.html', {'entries': entries})
 
 def entry(request, entry_id):
     entry = Blog.objects.get(id=entry_id)
@@ -32,7 +33,7 @@ def login(request):
     errors = []
     if request.method == 'POST':
 
-        user=User.objects.get(username=request.POST['username'])
+        user = User.objects.get(username=request.POST['username'])
         if not user:
             errors.append('invalid username')
         elif not user.password==request.POST['password']:
@@ -49,4 +50,4 @@ def login(request):
         #    return render(request, 'blog/show_entries.html')
     #else:
     #    form = BlogForm()
-    return render(request, 'blog/login.html')
+    return render(request, 'blog/login.html', {'errors': errors})
