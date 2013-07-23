@@ -17,10 +17,10 @@
           </button>
           <div class="nav-collapse collapse">
             <p class="navbar-text pull-right">
-            {% if not request.session.logged_in %}
+            {% if not user.is_authenticated %}
               <a href="/login/">login</a>
             {% else %}
-              <a href="#">logout</a>
+              <a href="/logout/">logout</a>
             {% endif %}
             </p>
             <ul class="nav">

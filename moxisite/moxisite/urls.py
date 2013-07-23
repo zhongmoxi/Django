@@ -6,6 +6,8 @@ from books import views
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
+from blog.LatestEntriesFeed import LatestEntriesFeed
+
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -27,6 +29,9 @@ urlpatterns = patterns('',
     url(r'^add_entry/$', 'blog.views.add_entry'),
     url(r'^show_entries/$', 'blog.views.show_entries'),
     url(r'^thank/$', 'blog.views.thank'),
+    url(r'^logout/$', 'blog.views.logout'),
     url(r'^entry/(?P<entry_id>\d+)/$', 'blog.views.entry'),
     url(r'^login/$', 'blog.views.login'),
+    url(r'^alipay/ptn/', include('alipay.create_partner_trade_by_buyer.ptn.urls')),
+    url(r'^latest/feed/$', LatestEntriesFeed()),
 )

@@ -9,9 +9,3 @@ class Blog(models.Model):
     def __unicode__(self):
         return self.title
 
-class User(models.Model):
-    username = models.CharField(max_length=255)
-    password = models.CharField(max_length=255)
-
-    def __unicode__(self):
-        return self.username

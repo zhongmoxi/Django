@@ -11,9 +11,24 @@
     </fieldset>
   </form>
   <ul class="entries">
-  {% for entry in entries %}
+  {% for entry in entries.object_list %}
   <li><strong><a class="entry_link" target="_blank" href="/entry/{{entry.id}}">{{entry.title}}</a></strong>
     <p class="text-success">{{entry.body_text}}</p>
   {% endfor %}
   </ul>
+  <div class="pagination">
+      <span class="step-links">
+          {% if entries.has_previous %}
+              <a href="?page={{ entries.previous_page_number }}">previous</a>
+          {% endif %}
+            
+          <span class="current">
+              Page {{ entries.number }} of {{ entries.paginator.num_pages }}.
+          </span>
+
+          {% if entries.has_next %}
+              <a href="?page={{ entries.next_page_number }}">next</a>
+          {% endif %}
+      </span>
+  </div>
 {% endblock %}

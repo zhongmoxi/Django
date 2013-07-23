@@ -1,13 +1,17 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, Http404
-from blog.models import Blog, User
+from blog.models import Blog
 from django.template import RequestContext
+from django.contrib import auth
+from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator, InvalidPage, EmptyPage, PageNotAnInteger
 
+@login_required
 def add_entry(request):
     if request.method == 'POST':
         blog = Blog.objects.create(title=request.POST['title'], body_text=request.POST['body_text'])
         blog.save()
-        return HttpResponseRedirect('/thank/')
+        return HttpResponseRedirect('/show_entries/')
         #return render(request, 'blog/thank.html')
 
         #blog = BlogForm(request.POST)
@@ -22,7 +26,19 @@ def thank(request):
     return render(request, 'blog/thank.html')
 
 def show_entries(request):
-    entries = Blog.objects.all()
+    entry_list = Blog.objects.all()
+    paginator = Paginator(entry_list, 5)
+    
+    try:
+        page = int(request.GET.get('page', '1'))
+    except ValueError:
+        page = 1
+
+    try:
+        entries = paginator.page(page)
+    except (EmptyPage, InvalidPage):
+        entries = paginator.page(paginator.num_pages)
+
     return render(request, 'blog/show_entries.html', {'entries': entries})
 
 def entry(request, entry_id):
@@ -30,24 +46,14 @@ def entry(request, entry_id):
     return render(request, 'blog/entry.html', {'entry': entry})
 
 def login(request):
-    errors = []
-    if request.method == 'POST':
+    username = request.POST.get('username', '')
+    password = request.POST.get('password', '')
+    user = auth.authenticate(username=username, password=password)
+    if user is not None and user.is_active:
+        auth.login(request, user)
+        return HttpResponseRedirect('/show_entries/')
+    return render(request, 'blog/login.html')
 
-        user = User.objects.get(username=request.POST['username'])
-        if not user:
-            errors.append('invalid username')
-        elif not user.password==request.POST['password']:
-            errors.append('invalid password')
-        else:
-            request.session['logged_in'] = True
-            request.session['username'] = user.username
-            return HttpResponseRedirect('/show_entries/')
-        #return render(request, 'blog/thank.html')
-
-        #blog = BlogForm(request.POST)
-        #if form.is_valid():
-        #    blog = form.save()
-        #    return render(request, 'blog/show_entries.html')
-    #else:
-    #    form = BlogForm()
-    return render(request, 'blog/login.html', {'errors': errors})
+def logout(request):
+    auth.logout(request)
+    return HttpResponseRedirect('/thank/')
