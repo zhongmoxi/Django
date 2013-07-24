@@ -26,7 +26,7 @@ def thank(request):
     return render(request, 'blog/thank.html')
 
 def show_entries(request):
-    entry_list = Blog.objects.all()
+    entry_list = Blog.objects.order_by("-id")
     paginator = Paginator(entry_list, 5)
     
     try:
@@ -39,7 +39,7 @@ def show_entries(request):
     except (EmptyPage, InvalidPage):
         entries = paginator.page(paginator.num_pages)
 
-    return render(request, 'blog/show_entries.html', {'entries': entries})
+    return render(request, 'blog/show_entries.html', {"entries": entries})
 
 def entry(request, entry_id):
     entry = Blog.objects.get(id=entry_id)
@@ -57,3 +57,21 @@ def login(request):
 def logout(request):
     auth.logout(request)
     return HttpResponseRedirect('/thank/')
+
+@login_required
+def edit_entry(request, entry_id):
+    entry = Blog.objects.get(id=entry_id)
+    if request.method == 'POST':
+        #blog = Blog.objects.filter(id=entry_id).update(title=request.POST['title'], body_text=request.POST['body_text'])
+        entry.title = request.POST['title']
+        entry.body_text = request.POST['body_text']
+        entry.save()
+        #return HttpResponseRedirect('/entry/', {'entry_id': entry_id})
+        return HttpResponseRedirect('/show_entries/')
+    return render(request, 'blog/edit_entry.html', {'entry': entry})
+
+@login_required
+def delete_entry(request, entry_id):
+    entry = Blog.objects.get(id=entry_id)
+    entry.delete()
+    return HttpResponseRedirect('/show_entries/')

@@ -1,7 +1,7 @@
 {% extends "blog/layout.html" %}
 {% block mybody %}
   <h2>Login</h2>
-  <form action="/login/" method="POST">
+  <form action="." method="POST">
     {% csrf_token %}
     <input type=text name=username placeholder="Username">
     <input type=password name=password placeholder="Password">
