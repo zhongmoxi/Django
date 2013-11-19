@@ -5,22 +5,26 @@ from django.template import RequestContext
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, InvalidPage, EmptyPage, PageNotAnInteger
+from .forms import BlogForm
+# from models import Blog
 
 @login_required
 def add_entry(request):
     if request.method == 'POST':
-        blog = Blog.objects.create(title=request.POST['title'], body_text=request.POST['body_text'])
-        blog.save()
-        return HttpResponseRedirect('/show_entries/')
-        #return render(request, 'blog/thank.html')
-
-        #blog = BlogForm(request.POST)
-        #if form.is_valid():
-        #    blog = form.save()
-        #    return render(request, 'blog/show_entries.html')
-    #else:
-    #    form = BlogForm()
-    return render(request, 'blog/show_entries.html')
+        form = BlogForm(request.POST, request.FILES)
+        if form.is_valid():
+            cd = form.cleaned_data
+            blog = Blog(title=cd['title'], body_text=cd['body_text'])
+            blog.save()
+            f = request.FILES['img']
+            des_origin_f = open('/Users/zhongnakakei/Documents/Django/moxisite/blog/static/img/test.jpg', "ab")
+            for chunk in f.chunks():
+                des_origin_f.write(chunk)
+            des_origin_f.close()
+            return HttpResponseRedirect('/show_entries/')
+    else:
+        form = BlogForm()
+    return render(request, 'blog/show_entries.html', {'form':form})
 
 def thank(request):
     return render(request, 'blog/thank.html')

@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from books.models import Book
 from django.core.mail import send_mail
-from forms import ContactForm
+from .forms import ContactForm
 
 def search_form(request):
     return render(request, 'books/search_form.html')
@@ -18,17 +18,17 @@ def search(request):
             return render(request, 'books/search_results.html', {'books': books, 'query': q})
     return render(request, 'books/search_form.html', {'error': error})
 
+
 def contact(request):
     if request.method == 'POST':
-        form = ContactForm(request.POST)
+        form = ContactForm(request.POST, request.FILES)
         if form.is_valid():
-            cd = form.cleaned_date
-            send_mail(
-                cd['subject'],
-                cd['message'],
-                cd.get('email','noreply@example.com'),
-                ['siteower@example.com'],
-            )
+            cd = form.cleaned_data
+            f = request.FILES['file']
+            des_origin_f = open('/Users/zhongnakakei/Desktop/flower.jpg', "ab")  
+            for chunk in f.chunks():  
+                des_origin_f.write(chunk)  
+            des_origin_f.close()  
             return HttpResponseRedirect('/contact/thanks/')
     else:
         form = ContactForm(

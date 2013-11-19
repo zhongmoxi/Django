@@ -1,15 +1,20 @@
 {% extends "blog/layout.html" %}
 {% block mybody %}
-  <form action="/add_entry/" method="POST" class=add-entry>
-    {% csrf_token %}
+  <form action="/add_entry/" method="POST" enctype="multipart/form-data">
     <fieldset>
-      <label>Title</label>
-      <input type=text placeholder="Type title here" size=30 name=title>
-      <label>Text</label>
-      <textarea name="body_text" rows=5 cols=40></textarea>
-      <input type=submit value=Share>
+      <legend>标题</legend>
+      <input type="text" name="title"/>
+      <legend>内容</legend>
+      <input type="text" name="body_text"/>
+      <legend>上传图片</legend>
+      <input type="file" name="docfile"/>
+      <input type="submit" value="submit">
     </fieldset>
+    
   </form>
+
+
+
   <ul class="entries">
   {% for entry in entries.object_list %}
   <li><strong><a class="entry_link" target="_blank" href="/entry/{{entry.id}}">{{entry.title}}</a></strong>
