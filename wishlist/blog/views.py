@@ -47,13 +47,17 @@ def entry(request, entry_id):
     entry = Blog.objects.get(id=entry_id)
     return render(request, 'blog/entry.html', {'entry': entry})
 
+def wish(request, entry_id):
+    entry = Blog.objects.get(id=entry_id)
+    return render(request, 'blog/wish.html', {'entry': entry})
+
 def login(request):
     username = request.POST.get('username', '')
     password = request.POST.get('password', '')
     user = auth.authenticate(username=username, password=password)
     if user is not None and user.is_active:
         auth.login(request, user)
-        return HttpResponseRedirect('/show_entries/')
+        return HttpResponseRedirect('/')
     return render(request, 'blog/login.html')
 
 def logout(request):

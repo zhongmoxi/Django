@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block mybody %}
+  <h1>Search results for "{{query_word}}":</h1>
+  <ul class=entries>
+  {% for entry in results %}
+    <li><h2>{{entry.title}}</h2>
+    <li><h3>{{entry.author}}  {{entry.pub_date | timesince }}</h3>
+    {{ entry.text|md }}
+  {% else %}
+    <li><em>Unbelievable. No entries for search results</em>
+    {% endfor %}
+  </ul>
+{% endblock %}
+

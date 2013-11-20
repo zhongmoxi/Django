@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        
+        
+        <link rel="stylesheet" href="/static/wish/css/styles.css" />
+    
+    </head>
+    
+    <body>
+        <section id="wish_content">
+            <nav id="filter">
+                <a href="index.html" class="">Back to Everything</a>
+                <a href="#" class="active">{{entry.title}}</a>
+            </nav>
+
+            <div class="wish_title_image">
+                <img src='{{ entry.image.url }}'>        
+            </div>
+
+            <div>
+                <h2>
+                    {{ entry.body_text }}
+                </h2>
+            </div>
+
+            <div>
+                <span><a href="/entry/{{entry.id}}/edit">编辑</a>   <a href="/entry/{{entry.id}}/delete">删除</a></span>
+            </div>
+        </section>
+            
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+        <script src="/static/wish/js/jquery.quicksand.js"></script>
+        <script src="/static/wish/js/script.js"></script>
+        
+        
+        <div id="footer">
+            <div>
+                All rights reserved. Designed by <a href="applestone0109@gmail.com" target="_blank">moxi</a>
+            </div>
+        </div>
+    </body>
+</html>
+
+

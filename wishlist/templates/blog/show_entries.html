@@ -15,7 +15,7 @@
 
   <ul class="entries">
   {% for entry in entries.object_list %}
-  <li><strong><a class="entry_link" target="_blank" href="/entry/{{entry.id}}">{{entry.title}}</a></strong>
+  <li><strong><a class="entry_link" target="_blank" href="/wish/{{entry.id}}">{{entry.title}}</a></strong>
     <p class="text-success">{{entry.body_text}}</p>
   {% endfor %}
   </ul>

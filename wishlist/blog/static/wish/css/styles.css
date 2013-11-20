@@ -271,3 +271,18 @@ h1{
     top:0;
     width:290px;
 }
+
+#wish_content{
+    text-align: center;
+    display:block;
+    overflow:hidden;
+    width: 830px;
+    margin:0 auto;
+    margin-bottom: 120px;
+}
+
+.wish_title_image img{
+    border: 5px solid #ccc;
+    margin-bottom: 35px;
+    position: relative;
+}

@@ -1,0 +1,22 @@
+{% extends "blog/wish_layout.html" %}
+{% block mybody %}
+	<nav id="filter">
+        <a href="/" class="">Back to Everything</a>
+        <a href="#" class="active">{{entry.title}}</a>
+    </nav>
+
+    <div class="wish_title_image">
+        <img src='{{ entry.image.url }}'>        
+    </div>
+
+    <div>
+    	<h2>
+    		{{ entry.body_text }}
+    	</h2>
+    </div>
+
+    <div>
+    	<span><a href="/entry/{{entry.id}}/edit">编辑</a>   <a href="/entry/{{entry.id}}/delete">删除</a></span>
+    </div>
+{% endblock %}
+

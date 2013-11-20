@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Django</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css" media="screen">
+  </head>
+
+  <body>
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>    
+            <span class="icon-bar"></span>
+          </button>
+          <div class="nav-collapse collapse">
+            <p class="navbar-text pull-right">
+            {% if not user.is_authenticated %}
+              <a href="/login/">login</a>
+            {% else %}
+              <a href="/logout/">logout</a>
+            {% endif %}
+            </p>
+            <ul class="nav">
+              <li class="active"><a href="/">Home</a></li>
+              <li ><a href="#">About</a></li>
+            </ul>
+            <form class="navbar-form" action="#" method= "post" name= "search">
+              <input type=text name=query_word> 
+              <input type=submit value=Search>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span9 offset3">
+          <div class=flash>^_^</div>
+          {% block mybody %}{% endblock %}
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="./static/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+       var disqus_shortname = 'zhongmoxi';
+       (function () {
+         var s = document.createElement('script'); s.async = true;
+         s.type = 'text/javascript';
+         s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+         (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+       }());
+    </script>
+  </body>
+</html>
+
+

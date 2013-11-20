@@ -1,0 +1,11 @@
+{% extends "blog/layout.html" %}
+{% block mybody %}
+  <div class=entries>
+    <li><strong><a class="entry_link" href="/entry/{{entry.id}}">{{entry.title}}</a></strong>
+    <p class="text-success">{{ entry.body_text }}</p>
+    {% if entry.image %}
+    	<img src='{{ entry.image.url }}' />
+    {% endif %}
+    <span><a href="/entry/{{entry.id}}/edit">编辑</a>   <a href="/entry/{{entry.id}}/delete">删除</a></span>
+  </div>
+{% endblock %}
