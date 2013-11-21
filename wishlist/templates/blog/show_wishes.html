@@ -1,0 +1,15 @@
+{% extends "blog/wish_layout.html" %}
+{% block mytitle %}
+    <title>我的心愿</title>
+{% endblock %}
+{% block mybody %}
+    <nav id="filter"></nav>
+    <section id="container">
+        <ul id="stage">
+            {% for entry in entries %}
+                <li data-tags="Moxi's wishes"><a href="/wish/{{entry.id}}" target="_blank" title="{{entry.title}}"><img src='{{ entry.image.url }}' alt="Illustration" /></a></li>
+            {% endfor %}
+        </ul>
+    </section>
+{% endblock %}
+

@@ -2,19 +2,16 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        
-        
+        {% block mytitle %}{% endblock %}
         <link rel="stylesheet" href="/static/wish/css/styles.css" />
-    
     </head>
     
     <body>
-        <section id="wish_content">
-            {% block mybody %}{% endblock %}
-            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-            <script src="/static/wish/js/jquery.quicksand.js"></script>
-            <script src="/static/wish/js/script.js"></script>
-        </section>
+        {% block mybody %}{% endblock %} 
+        
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+        <script src="/static/wish/js/jquery.quicksand.js"></script>
+        <script src="/static/wish/js/script.js"></script>
         
         <div id="footer">
             <div>

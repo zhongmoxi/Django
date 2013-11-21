@@ -43,6 +43,11 @@ def show_entries(request):
 
     return render(request, 'blog/show_entries.html', {"entries": entries})
 
+def show_wishes(request):
+    entry_list = Blog.objects.order_by("-id")
+
+    return render(request, 'blog/show_wishes.html', {"entries": entry_list})
+
 def entry(request, entry_id):
     entry = Blog.objects.get(id=entry_id)
     return render(request, 'blog/entry.html', {'entry': entry})
