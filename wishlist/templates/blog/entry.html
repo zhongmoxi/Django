@@ -6,6 +6,7 @@
     {% if entry.image %}
     	<img src='{{ entry.image.url }}' />
     {% endif %}
+    <span>{{ entry.author }}   {{ entry.status }}   {{ entry.publish_time }}  </span>
     <span><a href="/entry/{{entry.id}}/edit">编辑</a>   <a href="/entry/{{entry.id}}/delete">删除</a></span>
   </div>
 {% endblock %}

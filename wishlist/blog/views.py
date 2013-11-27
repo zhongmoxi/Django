@@ -17,7 +17,8 @@ def add_entry(request):
         if form.is_valid():
             image = request.FILES.get("image", None)
             cd = form.cleaned_data
-            blog = Blog(title=cd['title'], body_text=cd['body_text'], image=image)
+            author = request.user.username
+            blog = Blog(title=cd['title'], body_text=cd['body_text'], image=image, author=author, status=cd['status'])
             blog.save()
             return HttpResponseRedirect(reverse('home'))
     else:
@@ -41,7 +42,8 @@ def show_entries(request):
     except (EmptyPage, InvalidPage):
         entries = paginator.page(paginator.num_pages)
 
-    return render(request, 'blog/show_entries.html', {"entries": entries})
+    form = BlogForm()
+    return render(request, 'blog/show_entries.html', {"entries": entries, 'form': form})
 
 def show_wishes(request):
     entry_list = Blog.objects.order_by("-id")

@@ -47,7 +47,9 @@
         		{{ entry.body_text }}
         	</h2>
         </div>
-
+        <div>
+          <span>{{ entry.author }}   {{ entry.status }}   {{ entry.publish_time }}  </span>
+        </div>
         <div>
         	<span><a href="/entry/{{entry.id}}/edit">编辑</a>    <a href="/entry/{{entry.id}}/delete">删除</a></span>
         </div>
