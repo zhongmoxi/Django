@@ -281,8 +281,14 @@ h1{
     margin-bottom: 120px;
 }
 
+.wish_title_image{
+    text-align: center;
+}
+
 .wish_title_image img{
     border: 5px solid #ccc;
+    width: 600px;
+    text-align: center;
     margin-bottom: 35px;
     position: relative;
 }

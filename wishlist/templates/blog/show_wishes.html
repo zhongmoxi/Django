@@ -7,7 +7,7 @@
     <section id="container">
         <ul id="stage">
             {% for entry in entries %}
-                <li data-tags="Moxi's wishes"><a href="/wish/{{entry.id}}" target="_blank" title="{{entry.title}}"><img src='{{ entry.image.url }}' alt="Illustration" /></a></li>
+                <li data-tags="{{entry.status}}"><a href="/wish/{{entry.id}}" target="_blank" title="{{entry.title}}"><img src='{{ entry.image.url }}' alt="Illustration" /></a></li>
             {% endfor %}
         </ul>
     </section>
