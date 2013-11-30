@@ -10,7 +10,7 @@ from django.core.paginator import Paginator, InvalidPage, EmptyPage, PageNotAnIn
 from blog.models import Blog, UserProfile
 
 
-from .forms import BlogForm
+from .forms import BlogForm, UserForm
 
 @login_required
 def add_entry(request):
@@ -29,19 +29,19 @@ def add_entry(request):
         form = BlogForm()
     return render(request, 'blog/show_entries.html', {'form':form})
 
-
-# def add_user(request):
-#     if request.method == 'POST':
-#         form = UserForm(request.POST)
-#         if form.is_valid():
-#             cd = form.cleaned_data
-#             user.save 
-#             user = auth.authenticate(username=cd['username'], password=cd['password'], email=cd['email'])
-#             auth.login(request, user)
-#             return HttpResponseRedirect(reverse('home'))
-#     else:
-#         form = BlogForm()
-#     return render(request, 'blog/register.html', {'form':form})
+def register(request):
+    if request.method == 'POST':
+        form = UserForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data  
+            user = User.objects.create_user(username=cd['username'], password=cd['password'], email=cd['email'])
+            user.save
+            user = auth.authenticate(username=cd['username'], password=cd['password'], email=cd['email'])
+            auth.login(request, user)
+            return HttpResponseRedirect(reverse('home'))
+    else:
+        form = UserForm()
+    return render(request, 'blog/register.html', {'form':form})
     
 
 def thank(request):

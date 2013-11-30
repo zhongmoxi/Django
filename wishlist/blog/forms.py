@@ -18,3 +18,8 @@ class BlogForm(forms.Form):
     #expected_date = forms.DateField(widget=SelectDateWidget(years=BIRTH_YEAR_CHOICES))
     #expected_date = forms.DateField(input_formats=['%Y/%m/%d'], widget=forms.DateInput(format = '%Y/%m/%d'))
     #status = forms.ChoiceField(widget=forms.RadioSelect,choices=STATUS_CHOICES)
+
+class UserForm(forms.Form):
+    username = forms.CharField(max_length=255)
+    password = forms.CharField(max_length=30)
+    email = forms.EmailField(max_length=30)
