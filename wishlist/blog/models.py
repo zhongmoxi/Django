@@ -36,7 +36,7 @@ class Blog(models.Model):
     author = models.ForeignKey(UserProfile)
     status = models.CharField(max_length=255, choices=STATUS_CHOICES, default='To be done')
     publish_time = models.DateTimeField(auto_now_add=True)
-    #expected_date = models.DateField(default=datetime.datetime.now().date())
+    expected_date = models.DateField(default=datetime.datetime.now().date()+datetime.timedelta(days=100))
     privacy = models.NullBooleanField()
 
     def __unicode__(self):

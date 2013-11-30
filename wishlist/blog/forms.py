@@ -8,7 +8,7 @@ class BlogForm(forms.Form):
         ('Dreaming', 'Dreaming'),
         ('Abandon', 'Abandon'),
     )
-    BIRTH_YEAR_CHOICES = ('1980', '1981', '1982', '1983', '1984', '1985', '1986', '1987', '1988', '1989', '1990', '1991', '1992', '1993', '1994', '1995', '1996', '1997', '1998')
+    #BIRTH_YEAR_CHOICES = ('1980', '1981', '1982', '1983', '1984', '1985', '1986', '1987', '1988', '1989', '1990', '1991', '1992', '1993', '1994', '1995', '1996', '1997', '1998')
 
     title = forms.CharField(max_length=255)
     body_text = forms.CharField(widget=forms.Textarea(attrs={'cols': 80, 'rows': 10}))
