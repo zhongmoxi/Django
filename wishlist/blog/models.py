@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 import datetime
+from django.forms import ModelForm
 
 
 class UserProfile(models.Model):
@@ -20,15 +21,14 @@ class UserProfile(models.Model):
         return self.user.username
 
 
-class Blog(models.Model):
-
-    STATUS_CHOICES = (
+STATUS_CHOICES = (
         ('To be done', 'To be done'),
         ('Achieved', 'Achieved'),
         ('Dreaming', 'Dreaming'),
         ('Abandon', 'Abandon'),
-    )
+)
 
+class Blog(models.Model):
     title = models.CharField(max_length=255)
     body_text = models.CharField(max_length=1024)
     image = models.ImageField(upload_to='photos', blank=True, null=True)
@@ -41,6 +41,10 @@ class Blog(models.Model):
 
     def __unicode__(self):
         return self.title
+
+class BlogForm(ModelForm):
+    class Meta:
+        model = Blog
 
 def create_user_profile(sender, instance, created, **kwargs):
     if created:

@@ -15,19 +15,18 @@ from .forms import BlogForm, UserForm
 @login_required
 def add_entry(request):
     if request.method == 'POST':
-        form = BlogForm(request.POST, request.FILES)
-        if form.is_valid():
-            image = request.FILES.get("image", None)
-            cd = form.cleaned_data
-            author = request.user.get_profile()
-            blog = Blog(title=cd['title'], body_text=cd['body_text'], image=image, author=author, status=cd['status'], privacy=cd['privacy'])
+        # form = BlogForm(request.POST, request.FILES)
+        # if form.is_valid():
+        #     image = request.FILES.get("image", None)
+        #     cd = form.cleaned_data
+        #     author = request.user.get_profile()
+        #     blog = Blog(title=cd['title'], body_text=cd['body_text'], image=image, author=author, status=cd['status'], privacy=cd['privacy'])
+            blog=BlogForm(request.POST, request.FILES)
             blog.save()
             return HttpResponseRedirect(reverse('home'))
     else:
-        author = request.user.get_profile()
-        print author
         form = BlogForm()
-    return render(request, 'blog/show_entries.html', {'form':form})
+        return render(request, 'blog/show_entries.html', {'form':form})
 
 def register(request):
     if request.method == 'POST':
@@ -85,9 +84,10 @@ def entry(request, entry_id):
     entry = Blog.objects.get(id=entry_id)
     return render(request, 'blog/entry.html', {'entry': entry})
 
-def wish(request, entry_id):
-    entry = Blog.objects.get(id=entry_id)
-    return render(request, 'blog/wish.html', {'entry': entry})
+def wish(request, wish_id):
+    wish = Blog.objects.get(id=wish_id)
+    author = request.user.get_profile()
+    return render(request, 'blog/wish.html', {'wish': wish, 'author': author})
 
 def login(request):
     username = request.POST.get('username', '')
@@ -100,22 +100,29 @@ def login(request):
 
 def logout(request):
     auth.logout(request)
-    return HttpResponseRedirect('/thank/')
+    return HttpResponseRedirect('/')
 
 @login_required
-def edit_entry(request, entry_id):
-    entry = Blog.objects.get(id=entry_id)
-    if request.method == 'POST':
-        #blog = Blog.objects.filter(id=entry_id).update(title=request.POST['title'], body_text=request.POST['body_text'])
-        entry.title = request.POST['title']
-        entry.body_text = request.POST['body_text']
-        entry.save()
-        #return HttpResponseRedirect('/entry/', {'entry_id': entry_id})
-        return HttpResponseRedirect('/show_entries/')
-    return render(request, 'blog/edit_entry.html', {'entry': entry})
+def edit_wish(request, wish_id):
+    wish = Blog.objects.get(id=wish_id)
+    if wish.author == request.user.get_profile() and request.method == 'POST':
+        # form = BlogForm(request.POST, request.FILES, instance=wish)
+        # if form.is_valid():
+        #     image = request.FILES.get("image", None)
+        #     cd = form.cleaned_data
+        #     author = request.user.get_profile()
+        #     blog = Blog(title=cd['title'], body_text=cd['body_text'], image=image, author=author, status=cd['status'], privacy=cd['privacy'])
+            blog=BlogForm(request.POST, request.FILES, instance=wish)
+            blog.save()
+            return HttpResponseRedirect(reverse('home'))
+    else:
+        form = BlogForm(instance=wish)
+        return render(request, 'blog/edit_wish.html', {'form':form})
+
 
 @login_required
-def delete_entry(request, entry_id):
-    entry = Blog.objects.get(id=entry_id)
-    entry.delete()
-    return HttpResponseRedirect('/show_entries/')
+def delete_wish(request, wish_id):
+    wish = Blog.objects.get(id=wish_id)
+    if wish.author == request.user.get_profile():
+        wish.delete()
+    return HttpResponseRedirect('/')

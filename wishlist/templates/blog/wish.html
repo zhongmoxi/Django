@@ -1,29 +1,31 @@
 {% extends "blog/wish_layout.html" %}
 {% block mytitle %}
-    <title>{{entry.title}} - 心愿</title>
+    <title>{{wish.title}} - 心愿</title>
 {% endblock %}
 {% block mybody %}
     <section id="wish_content">
     	<nav id="filter">
             <a href="/" class="">Back to Everything</a>
-            <a href="#" class="active">{{entry.title}}</a>
+            <a href="#" class="active">{{wish.title}}</a>
         </nav>
 
         <div class="wish_title_image">
-            <img src='{{ entry.image.url }}'>        
+            <img src='{{ wish.image.url }}'>        
         </div>
 
         <div>
         	<h2>
-        		{{ entry.body_text }}
+        		{{ wish.body_text }}
         	</h2>
         </div>
         <div>
-          <span>{{ entry.author.user.username }}   {{ entry.status }}   {{ entry.publish_time }}   {{ entry.privacy }} {{ entry.expected_date }}</span>
+          <span>{{ wish.author.user.username }}   {{ wish.status }}   {{ wish.publish_time }}   {{ wish.privacy }} {{ wish.expected_date }}</span>
         </div>
-        <div>
-        	<span><a href="/entry/{{entry.id}}/edit">编辑</a>    <a href="/entry/{{entry.id}}/delete">删除</a></span>
-        </div>
+        {% if wish.author == author %}
+          <div>
+          	<span><a href="/wish/{{wish.id}}/edit/">编辑</a>    <a href="/wish/{{wish.id}}/delete/">删除</a></span>
+          </div>
+        {% endif %}
     </section>
 {% endblock %}
 
