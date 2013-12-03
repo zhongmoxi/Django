@@ -88,8 +88,11 @@ def entry(request, entry_id):
 
 def wish(request, wish_id):
     wish = Blog.objects.get(id=wish_id)
-    author = request.user.get_profile()
-    return render(request, 'blog/wish.html', {'wish': wish, 'author': author})
+    if request.user.is_authenticated():
+        login_user = request.user.get_profile().user.username
+    else:
+        login_user = ""
+    return render(request, 'blog/wish.html', {'wish': wish, 'login_user': login_user})
 
 def login(request):
     username = request.POST.get('username', '')

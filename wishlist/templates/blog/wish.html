@@ -21,7 +21,7 @@
         <div>
           <span>{{ wish.author.user.username }}   {{ wish.status }}   {{ wish.publish_time }}   {{ wish.privacy }} {{ wish.expected_date }}</span>
         </div>
-        {% if wish.author == author %}
+        {% if wish.author.user.username == login_user %}
           <div>
           	<span><a href="/wish/{{wish.id}}/edit/">编辑</a>    <a href="/wish/{{wish.id}}/delete/">删除</a></span>
           </div>
