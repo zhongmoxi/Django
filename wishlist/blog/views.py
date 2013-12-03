@@ -21,7 +21,9 @@ def add_entry(request):
         #     cd = form.cleaned_data
         #     author = request.user.get_profile()
         #     blog = Blog(title=cd['title'], body_text=cd['body_text'], image=image, author=author, status=cd['status'], privacy=cd['privacy'])
-            blog=BlogForm(request.POST, request.FILES)
+            author = request.user.get_profile()
+            wish = Blog(author=author)
+            blog=BlogForm(request.POST, request.FILES, instance=wish)
             blog.save()
             return HttpResponseRedirect(reverse('home'))
     else:
