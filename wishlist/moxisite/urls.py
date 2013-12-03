@@ -35,5 +35,5 @@ urlpatterns = patterns('',
     url(r'^accounts/register/$', 'blog.views.register'),
     url(r'^latest/feed/$', LatestEntriesFeed()),
     url(r'^user/(?P<user_id>\d+)$', 'blog.views.user_wishes'),
-    url(r'^(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT, }),
+    url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT, }),
 )
