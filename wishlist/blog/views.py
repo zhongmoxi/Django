@@ -39,7 +39,7 @@ def register(request):
             user.save
             user = auth.authenticate(username=cd['username'], password=cd['password'], email=cd['email'])
             auth.login(request, user)
-            return HttpResponseRedirect(reverse('home'))
+            return HttpResponseRedirect('/show_wishes/')
     else:
         form = UserForm()
     return render(request, 'blog/register.html', {'form':form})
