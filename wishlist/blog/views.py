@@ -45,9 +45,6 @@ def register(request):
     return render(request, 'blog/register.html', {'form':form})
     
 
-def thank(request):
-    return render(request, 'blog/thank.html')
-
 def show_entries(request):
     entry_list = Blog.objects.order_by("-id")
     paginator = Paginator(entry_list, 5)
@@ -124,6 +121,8 @@ def edit_wish(request, wish_id):
         form = BlogForm(instance=wish)
         return render(request, 'blog/edit_wish.html', {'form':form})
 
+def about(request):
+    return render(request, 'blog/about.html')
 
 @login_required
 def delete_wish(request, wish_id):
