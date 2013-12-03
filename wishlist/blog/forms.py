@@ -7,7 +7,7 @@ from blog.models import Blog
 class BlogForm(ModelForm):
     class Meta:
         model = Blog
-        exclude = ('author')
+        exclude = ('author',)
 
 class UserForm(forms.Form):
     username = forms.CharField(max_length=255)
