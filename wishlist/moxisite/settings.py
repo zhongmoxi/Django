@@ -129,10 +129,12 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     'blog',
+    
  
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
+
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

@@ -1,6 +1,12 @@
 {% extends "blog/wish_layout.html" %}
 {% block mytitle %}
-    <title>我的心愿</title>
+	{% if not user.is_authenticated %}
+        <title>imoxi 爱梦想</title>
+    {% else %}
+        <title>我的心愿</title>
+    {% endif %}
+
+    
 {% endblock %}
 {% block mybody %}
     <nav id="filter"></nav>
