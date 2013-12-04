@@ -81,7 +81,7 @@ def user_wishes(request, user_id):
     user = User.objects.get(id=user_id)
     user_profile = UserProfile.objects.get(user=user)
     entry_list = Blog.objects.filter(author=user_profile).order_by("-id")
-    return render(request, 'blog/show_wishes.html', {"entries": entry_list})
+    return render(request, 'blog/show_wishes.html', {"entries": entry_list, "title":user.username})
 
 def entry(request, entry_id):
     entry = Blog.objects.get(id=entry_id)
