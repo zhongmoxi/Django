@@ -135,7 +135,8 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
 )
 
-
+# DISQUS_API_KEY = 'D21FRzRwMHyqE9oCPZ2bbouL4U9MkbKrl2MUTfSKh0RpXQWYB17lLWLje8N78wwk'
+# DISQUS_WEBSITE_SHORTNAME = 'imoxime'
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
 # the site admins on every HTTP 500 error when DEBUG=False.
