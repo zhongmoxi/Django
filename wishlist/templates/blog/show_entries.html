@@ -18,6 +18,7 @@
   {% for entry in entries.object_list %}
   <li><strong><a class="entry_link" target="_blank" href="/wish/{{entry.id}}">{{entry.title}}</a></strong>
     <p class="text-success">{{entry.body_text}}</p>
+    <p >{{entry.author.user.username}}   {{entry.publish_time}}</p></br>
   {% endfor %}
   </ul>
   <div class="pagination">
