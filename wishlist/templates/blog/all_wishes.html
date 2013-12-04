@@ -12,15 +12,10 @@
     <nav id="filter"></nav>
     <section id="container">
         <ul id="stage">
-        	{% if entries %}
+        	{% if not entries %}
             	{% for entry in entries %}
                 	<li data-tags="{{entry.status}}"><a href="/wish/{{entry.id}}" title="{{entry.title}}"><img src='{{ entry.image.url }}' alt="Illustration" /></a></li>
             	{% endfor %}
-            {% else %}
-            	<div id="new_user_guide">
-            		你还没有写下心愿哦，快去<a href="/show_wishes/">添加</a>吧！</br></br>
-            		要不你先瞄一下<a href="/all_wishes/">别人的心愿</a>也不错哦！
-            	</div>
             {% endif %}
         </ul>
     </section>

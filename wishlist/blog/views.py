@@ -46,7 +46,7 @@ def register(request):
     
 
 def show_entries(request):
-    entry_list = Blog.objects.order_by("-id")
+    entry_list = Blog.objects.exclude(privacy="Yes").order_by("-id")
     paginator = Paginator(entry_list, 5)
     
     try:
@@ -62,6 +62,10 @@ def show_entries(request):
     form = BlogForm()
     return render(request, 'blog/show_entries.html', {"entries": entries, 'form': form})
 
+def all_wishes(request):
+    entry_list = Blog.objects.exclude(privacy="Yes").order_by("-id")
+    return render(request, 'blog/show_wishes.html', {"entries": entry_list})
+
 def show_wishes(request):
     user_id=request.user.id
     if user_id:
@@ -69,7 +73,7 @@ def show_wishes(request):
         user_profile = UserProfile.objects.get(user=user)
         entry_list = Blog.objects.filter(author=user_profile).order_by("-id")
     else:
-        entry_list = Blog.objects.order_by("-id")
+        entry_list = Blog.objects.exclude(privacy="Yes").order_by("-id")
 
     return render(request, 'blog/show_wishes.html', {"entries": entry_list})
 
