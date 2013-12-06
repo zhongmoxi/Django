@@ -203,6 +203,9 @@ h1{
 
     border: 5px solid #ccc;
     max-width: 230px;
+    width: 230px;
+    width:width: expression(document.body.clientWidth>230?"230px":"auto"); 
+    overflow: hidden;
 
     -webkit-transition: all 1.0s ease-out;
     -moz-transition: all 1.0s ease;
