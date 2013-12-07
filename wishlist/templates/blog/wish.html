@@ -10,14 +10,12 @@
             <a href="/all_wishes/">全部心愿</a>
             <a href="/show_wishes/">写心愿</a>
         </nav>
-        {% if entry.image %}
+        {% if wish.image %}
             <div class="wish_title_image">
                 <img src='{{ wish.image.url }}'>        
             </div>
         {% endif %}
-        <div>
-            <img src="">
-        </div>
+        
         <div id="wish_describe">
         	<h2>
         		{{ wish.body_text }}
