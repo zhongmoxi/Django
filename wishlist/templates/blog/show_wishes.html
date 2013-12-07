@@ -18,7 +18,9 @@
         <ul id="stage">
         	{% if entries %}
             	{% for entry in entries %}
-                	<li data-tags="{{entry.status}}"><a href="/wish/{{entry.id}}" title="{{entry.title}}"><img src='{{ entry.image.url }}' alt="Illustration" /></a></li>
+            		{% if entry.image %}
+                		<li data-tags="{{entry.status}}"><a href="/wish/{{entry.id}}" title="{{entry.title}}"><img src='{{ entry.image.url }}' alt="Illustration" /></a></li>
+                	{% endif %}
             	{% endfor %}
             {% else %}
             	<div id="new_user_guide">
