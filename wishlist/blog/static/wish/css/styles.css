@@ -284,6 +284,12 @@ h1{
     margin-bottom: 120px;
 }
 
+#wish_describe{
+    text-align: center;
+    padding-left: 95px;
+    width: 630px;
+}
+
 .wish_title_image{
     text-align: center;
 }
