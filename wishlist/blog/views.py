@@ -44,7 +44,7 @@ def register(request):
         form = UserForm()
     return render(request, 'blog/register.html', {'form':form})
     
-
+@login_required
 def show_entries(request):
     entry_list = Blog.objects.exclude(privacy="Yes").order_by("-id")
     paginator = Paginator(entry_list, 5)
