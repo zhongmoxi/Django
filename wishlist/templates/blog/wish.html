@@ -23,7 +23,9 @@
         </div>
         </br>
         <div>
-          <span><a href="/user/{{wish.author.user.id}}">{{wish.author.user.username}}</a>   {{ wish.status }}   {{ wish.publish_time }}  {{ wish.expected_date }}</span>
+          <span><a href="/user/{{wish.author.user.id}}">{{wish.author.user.username}}</a>   {{ wish.status }}  </br></br>
+          创建时间： {{ wish.publish_time }}  </br>
+          期望完成时间： {{ wish.expected_date }}</span>
         </div>
         {% if wish.author.user.username == login_user %}
           <div>
