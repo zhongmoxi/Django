@@ -128,6 +128,11 @@ def edit_wish(request, wish_id):
 def about(request):
     return render(request, 'blog/about.html')
 
+def search(request):
+  name = request.POST.get('search',None)
+  return HttpResponseRedirect('/all_wishes/',)
+
+
 @login_required
 def delete_wish(request, wish_id):
     wish = Blog.objects.get(id=wish_id)
