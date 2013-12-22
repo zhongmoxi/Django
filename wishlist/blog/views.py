@@ -23,7 +23,7 @@ def add_entry(request):
             wish = Blog(author=author)
             blog=BlogForm(request.POST, request.FILES, instance=wish)
             blog = blog.save()
-            path = blog.image.path
+            path = blog.image.path.encode('utf-8')
             os.system("gm convert {path} -thumbnail '630x460^' -gravity center -extent 630x460 {path}".format(path=path))
             return HttpResponseRedirect(reverse('home'))
     else:
