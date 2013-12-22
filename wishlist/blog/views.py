@@ -1,3 +1,7 @@
+# coding: utf-8
+
+import os
+
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, Http404
 from django.core.urlresolvers import reverse
@@ -15,16 +19,12 @@ from .forms import BlogForm, UserForm
 @login_required
 def add_entry(request):
     if request.method == 'POST':
-        # form = BlogForm(request.POST, request.FILES)
-        # if form.is_valid():
-        #     image = request.FILES.get("image", None)
-        #     cd = form.cleaned_data
-        #     author = request.user.get_profile()
-        #     blog = Blog(title=cd['title'], body_text=cd['body_text'], image=image, author=author, status=cd['status'], privacy=cd['privacy'])
             author = request.user.get_profile()
             wish = Blog(author=author)
             blog=BlogForm(request.POST, request.FILES, instance=wish)
-            blog.save()
+            blog = blog.save()
+            path = blog.image.path
+            os.system("gm convert {path} -thumbnail '630x460^' -gravity center -extent 630x460 {path}".format(path=path))
             return HttpResponseRedirect(reverse('home'))
     else:
         form = BlogForm()
