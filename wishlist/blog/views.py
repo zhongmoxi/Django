@@ -112,18 +112,14 @@ def logout(request):
 def edit_wish(request, wish_id):
     wish = Blog.objects.get(id=wish_id)
     if wish.author == request.user.get_profile() and request.method == 'POST':
-        # form = BlogForm(request.POST, request.FILES, instance=wish)
-        # if form.is_valid():
-        #     image = request.FILES.get("image", None)
-        #     cd = form.cleaned_data
-        #     author = request.user.get_profile()
-        #     blog = Blog(title=cd['title'], body_text=cd['body_text'], image=image, author=author, status=cd['status'], privacy=cd['privacy'])
-            blog=BlogForm(request.POST, request.FILES, instance=wish)
-            blog.save()
-            return HttpResponseRedirect(reverse('home'))
+        blog = BlogForm(request.POST, request.FILES, instance=wish)
+        blog = blog.save()
+        path = blog.image.path.encode('utf-8')
+        os.system("gm convert {path} -thumbnail '630x460^' -gravity center -extent 630x460 {path}".format(path=path))
+        return HttpResponseRedirect(reverse('home'))
     else:
         form = BlogForm(instance=wish)
-        return render(request, 'blog/edit_wish.html', {'form':form})
+        return render(request, 'blog/edit_wish.html', {'form': form})
 
 def about(request):
     return render(request, 'blog/about.html')
