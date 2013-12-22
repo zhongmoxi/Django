@@ -2,3 +2,4 @@ photos/
 *.swp
 *.db
 *.pyc
+.DS_Store
