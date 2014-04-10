@@ -37,4 +37,5 @@ urlpatterns = patterns('',
     url(r'^latest/feed/$', LatestEntriesFeed()),
     url(r'^user/(?P<user_id>\d+)$', 'blog.views.user_wishes'),
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT, }),
+    url(r'^next-stop-shanghai/$', 'blog.views.shanghai')
 )

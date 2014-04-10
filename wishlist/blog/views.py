@@ -124,9 +124,13 @@ def edit_wish(request, wish_id):
 def about(request):
     return render(request, 'blog/about.html')
 
+@login_required
+def shanghai(request):
+    return render(request, 'blog/shanghai.html')
+
 def search(request):
-  name = request.POST.get('search',None)
-  return HttpResponseRedirect('/all_wishes/',)
+    name = request.POST.get('search',None)
+    return HttpResponseRedirect('/all_wishes/',)
 
 
 @login_required
