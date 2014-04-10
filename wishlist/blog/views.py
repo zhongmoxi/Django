@@ -23,8 +23,9 @@ def add_entry(request):
             wish = Blog(author=author)
             blog=BlogForm(request.POST, request.FILES, instance=wish)
             blog = blog.save()
-            path = blog.image.path.encode('utf-8')
-            os.system("gm convert {path} -thumbnail '630x460^' -gravity center -extent 630x460 {path}".format(path=path))
+            if blog.image:
+                path = blog.image.path.encode('utf-8')
+                os.system("gm convert {path} -thumbnail '630x460^' -gravity center -extent 630x460 {path}".format(path=path))
             return HttpResponseRedirect(reverse('home'))
     else:
         form = BlogForm()
@@ -114,8 +115,9 @@ def edit_wish(request, wish_id):
     if wish.author == request.user.get_profile() and request.method == 'POST':
         blog = BlogForm(request.POST, request.FILES, instance=wish)
         blog = blog.save()
-        path = blog.image.path.encode('utf-8')
-        os.system("gm convert {path} -thumbnail '630x460^' -gravity center -extent 630x460 {path}".format(path=path))
+        if blog.image:
+            path = blog.image.path.encode('utf-8')
+            os.system("gm convert {path} -thumbnail '630x460^' -gravity center -extent 630x460 {path}".format(path=path))
         return HttpResponseRedirect(reverse('home'))
     else:
         form = BlogForm(instance=wish)
